@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "yakhub_bucket" {
-  bucket = "my-tf-test-bucket"
+  bucket = "mine-test-bucket"
   acl    = "private"
 
   tags = {
