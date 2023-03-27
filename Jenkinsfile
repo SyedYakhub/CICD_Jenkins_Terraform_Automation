@@ -1,29 +1,16 @@
 pipeline {
     agent any
     stages {
-        stage ('git checkout') {
+        stage ('ssh connect + git checkout + terraform apply') {
             steps {
-                git 'https://github.com/SyedYakhub/CICD_Jenkins_Terraform_Automation.git'
-            }
-        }
-        stage ('terraform init'){
-            steps {
-                sh 'terraform init'
-            }
-        }
-        stage ('terraform plan'){
-            steps {
-                sh 'terraform plan'
-            }
-        }
-        stage ('terraform apply'){
-            steps {
-                sh 'terraform apply --auto-approve'
-            }
-        }
-        stage ('terraform destroy'){
-            steps{
-                sh 'terraform destroy --auto-approve'
+                sshagent(['terraform_jenkins']) {
+                sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.15.49 git 'https://github.com/SyedYakhub/CICD_Jenkins_Terraform_Automation.git' '
+                sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.15.49 terraform init'
+                sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.15.49 terraform plan'
+                sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.15.49 terraform apply --auto-approve'
+                sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.15.49 terraform destroy --auto-approve'
+
+}
             }
         }
     }
