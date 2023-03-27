@@ -16,7 +16,7 @@ pipeline {
                 sh 'terraform plan'
             }
         }
-        steage ('terraform apply'){
+        stage ('terraform apply'){
             steps {
                 sh 'terraform apply --auto-approve'
             }
