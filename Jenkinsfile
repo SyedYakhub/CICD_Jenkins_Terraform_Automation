@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage ('ssh connect + git checkout + terraform apply') {
             steps {
-                sshagent(['terraform_jenkins']) {
+                sshagent(['docker-webapp']) {
                 sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.15.49 cd /var/lib/jenkins/workspace && git clone 'https://github.com/SyedYakhub/CICD_Jenkins_Terraform_Automation.git'"
                 sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.15.49 terraform init'
                 sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.15.49 terraform plan'
