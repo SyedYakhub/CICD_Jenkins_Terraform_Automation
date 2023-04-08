@@ -29,13 +29,13 @@ pipeline {
                 }
             }
         }
-        stage('Terraform Destroy') {
-            steps {
-                sshagent(['terraform_jenkins']) {
-                    sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.15.49 cd CICD_Jenkins_Terraform_Automation && terraform destroy --auto-approve'
-                }
-            }
-        }
+//         stage('Terraform Destroy') {
+//             steps {
+//                 sshagent(['terraform_jenkins']) {
+//                     sh 'ssh -o StrictHostKeyChecking=no ec2-user@172.31.15.49 cd CICD_Jenkins_Terraform_Automation && terraform destroy --auto-approve'
+//                 }
+//             }
+//         }
     }
 }
 
